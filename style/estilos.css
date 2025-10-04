@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.466);
+}
+
+h1 {
+    text-align: center;
+}
+
+.rejilla-organizaciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 18px;
+    justify-items: center;
+    margin-bottom: 30px;
+    max-width: 650px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.tarjeta-organizacion {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 15px 10px;
+    width: 185px; 
+    text-align: center;
+    box-shadow: 1px 2px 8px #ddd;
+}
+
+.imagen-logo {
+    width: 120px;
+    height: 90px;
+    object-fit: contain;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    transition: box-shadow .2s;
+}
+
+.imagen-logo:active {
+    box-shadow: 0 0 6px #2196f3;
+}
+
+.nombre-organizacion {
+    font-weight: 600;
+    font-size: 1.08em;
+    margin-bottom: 3px;
+}
+
+
+.valor-donacion {
+    color: #2196f3;
+    font-size: 0.97em;
+    margin-bottom: 5px;
+}
+
+.caja-resultados {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin: 35px auto 0 auto;
+    max-width: 550px;
+    min-height: 50px;
+    padding: 18px;
+    font-size: 1em;
+    color: #333;
+    box-shadow: 1px 2px 8px #eee;
+}
+
+#boton-finalizar {
+    display: block;
+    margin: 0 auto;
+    margin-top: 12px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 5px;
+    background: #2196f3;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 1px 2px 8px #b3cdf6;
+}
+#boton-finalizar:hover{
+    background: #1769aa;
+}
+
+
