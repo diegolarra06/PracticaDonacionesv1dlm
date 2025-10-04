@@ -3,11 +3,9 @@ body {
     margin: 20px;
     background-color: rgba(255, 255, 255, 0.466);
 }
-
 h1 {
     text-align: center;
 }
-
 .CentrarOrganizaciones {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -18,8 +16,6 @@ h1 {
     margin-left: auto;
     margin-right: auto;
 }
-
-
 .OrganizacionesBeneficas {
     background-color: #fff;
     border: 1px solid #eee;
@@ -29,7 +25,6 @@ h1 {
     text-align: center;
     box-shadow: 1px 2px 8px #ddd;
 }
-
 .logoImagen {
     width: 170px;
     height: 130px;
@@ -39,23 +34,19 @@ h1 {
     margin-bottom: 8px;
     transition: box-shadow .2s;
 }
-
 .logoImagen:active {
     box-shadow: 0 0 6px #2196f3;
 }
-
 .nombreCausasBeneficas {
     font-weight: 600;
     font-size: 1.08em;
     margin-bottom: 3px;
 }
-
 .PrecioAportacion {
     color: #2196f3;
     font-size: 0.97em;
     margin-bottom: 5px;
 }
-
 .Resultados {
     background: #fff;
     border: 1px solid #eee;
@@ -64,11 +55,11 @@ h1 {
     max-width: 550px;
     min-height: 50px;
     padding: 18px;
+    line-height: 1.5;
     font-size: 1em;
     color: #464646;
     box-shadow: 1px 2px 8px #eee;
 }
-
 #botonFinal {
     display: block;
     margin: 0 auto;
