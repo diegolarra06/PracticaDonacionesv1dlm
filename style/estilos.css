@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: rgba(255, 255, 255, 0.466);
+    background-color: #E3F2FD;
 }
 h1 {
     text-align: center;
@@ -32,19 +32,19 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     margin-bottom: 8px;
-    transition: box-shadow .2s;
+    
 }
 .logoImagen:active {
     box-shadow: 0 0 6px #2196f3;
 }
 .nombreCausasBeneficas {
     font-weight: 600;
-    font-size: 1.08em;
+    font-size: 1.5em;
     margin-bottom: 3px;
 }
 .PrecioAportacion {
     color: #2196f3;
-    font-size: 0.97em;
+    font-size: 1em;
     margin-bottom: 5px;
 }
 .Resultados {
@@ -58,7 +58,9 @@ h1 {
     line-height: 1.5;
     font-size: 1em;
     color: #464646;
-    box-shadow: 1px 2px 8px #eee;
+    box-shadow: 1px 2px 8px #272727;
+    text-align: center;
+    
 }
 #botonFinal {
     display: block;
