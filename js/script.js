@@ -12,13 +12,11 @@ function agregarAportacion(indice) {
     dineroTotalAportado += valoresDeLasAportaciones[indice];
     numeroTotalDeAportaciones++;
 }
-
 function mostrarResultados() {
     if (listaDeAportaciones.length === 0) {
         return;
     }
     tramiteEstaFinalizado = true;
-
     let conteoPorOrganizacion = new Array(valoresDeLasAportaciones.length).fill(0);
 
     for (let j = 0; j < listaDeAportaciones.length; j++) {
@@ -84,7 +82,6 @@ window.onload = function () {
             agregarAportacion(i);
         });
     }
-    
     let botonFinal = document.getElementById('botonFinal');
     botonFinal.addEventListener('click', mostrarResultados);
 };
