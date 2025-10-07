@@ -12,76 +12,75 @@ function agregarAportacion(indice) {
     dineroTotalAportado += valoresDeLasAportaciones[indice];
     numeroTotalDeAportaciones++;
 }
+
 function mostrarResultados() {
     if (listaDeAportaciones.length === 0) {
         return;
     }
     tramiteEstaFinalizado = true;
-    let conteoPorOrganizacion = new Array(valoresDeLasAportaciones.length).fill(0);
+    let conteoPorOrganizacion = Array.from({ length: valoresDeLasAportaciones.length }, () => 0);
 
-    for (let j = 0; j < listaDeAportaciones.length; j++) {
-        conteoPorOrganizacion[listaDeAportaciones[j]]++;
-    }
+    listaDeAportaciones.forEach(function(indice) {
+        conteoPorOrganizacion[indice]++;
+    });
 
-    let resumenDeAportaciones = [];
     const contenedor = document.getElementById('contenedorPrincipal');
     const organizaciones = contenedor.getElementsByClassName('OrganizacionesBeneficas');
-
-    for (let k = 0; k < conteoPorOrganizacion.length; k++) {
-        if (conteoPorOrganizacion[k] > 0) {
-            const nombre = organizaciones[k].getElementsByClassName('nombreCausasBeneficas')[0].textContent;
-            resumenDeAportaciones.push({ nombre: nombre, cantidad: conteoPorOrganizacion[k] });
+    let resumenDeAportaciones = conteoPorOrganizacion.map(function(cantidad, indice) {
+            return { 
+                nombre: organizaciones[indice].getElementsByClassName('nombreCausasBeneficas')[0].textContent,
+                cantidad: cantidad 
+                }; })
+        .filter(function(elemento) {
+            return elemento.cantidad > 0;
+        });
+        resumenDeAportaciones.sort(function(a, b) {
+        if (a.nombre > b.nombre) {
+            return -1;
         }
-    }
-
-    for (let m = 0; m < resumenDeAportaciones.length - 1; m++) {
-        for (let n = m + 1; n < resumenDeAportaciones.length; n++) {
-            if (resumenDeAportaciones[m].nombre < resumenDeAportaciones[n].nombre) {
-                let temp = resumenDeAportaciones[m];
-                resumenDeAportaciones[m] = resumenDeAportaciones[n];
-                resumenDeAportaciones[n] = temp;
-            }
+        if (a.nombre < b.nombre) {
+            return 1;
         }
-    }
+        return 0;
+    });
 
     const contenedorResultados = document.getElementById('Resultados');
     contenedorResultados.innerHTML = '';
 
-    for (let p = 0; p < resumenDeAportaciones.length; p++) {
+    resumenDeAportaciones.forEach(function(resumen) {
         const parrafo = document.createElement('p');
-        parrafo.textContent = resumenDeAportaciones[p].nombre + ' ---- ' + resumenDeAportaciones[p].cantidad + 
-        (resumenDeAportaciones[p].cantidad > 1 ?   ' aportaciones' : ' aportación');
+        parrafo.textContent = resumen.nombre + ' ---- ' + resumen.cantidad + 
+            (resumen.cantidad > 1 ? ' aportaciones' : ' aportación');
         contenedorResultados.appendChild(parrafo);
-    }
+    });
 
     const parrafoTotal = document.createElement('p');
     parrafoTotal.textContent = 'Donación final: ' + dineroTotalAportado + ' €';
     contenedorResultados.appendChild(parrafoTotal);
 
     const parrafoMedia = document.createElement('p');
-    const media = dineroTotalAportado / numeroTotalDeAportaciones;
+    let media = dineroTotalAportado / numeroTotalDeAportaciones;
     parrafoMedia.textContent = 'Donación media: ' + media.toFixed(2) + ' €/aportación';
     contenedorResultados.appendChild(parrafoMedia);
+
 }
 
- function reiniciarTramite() {
+function reiniciarTramite() {
     listaDeAportaciones = [];
     dineroTotalAportado = 0;
     numeroTotalDeAportaciones = 0;
     tramiteEstaFinalizado = false;
-
     document.getElementById('Resultados').innerHTML = '';
 }
-
-window.onload = function () {
+window.onload = function() {
     const contenedor = document.getElementById('contenedorPrincipal');
     const imagenes = contenedor.getElementsByClassName('logoImagen');
 
-    for (let i = 0; i < imagenes.length; i++) {
-        imagenes[i].addEventListener('click', function () {         
-            agregarAportacion(i);
+    Array.from(imagenes).forEach(function(imagen, indice) {
+        imagen.addEventListener('click', function() {
+            agregarAportacion(indice);
         });
-    }
+    });
     let botonFinal = document.getElementById('botonFinal');
     botonFinal.addEventListener('click', mostrarResultados);
-};
+}
