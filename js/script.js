@@ -112,3 +112,55 @@ let nombreMayus = (nombre || "").toLocaleUpperCase();
     }
     return null;
 }
+/* 
+   ENUNCIADO 4.4 y 4.5: Finalizar trámite, mostrar resultados ordenados e importes */
+function finalizarTramite() {
+    if (donacionesActuales.length === 0) {
+        return;
+    }
+
+    let fechaFin = new Date();
+    let agrupado = agruparDonacionesPorOrganizacion(donacionesActuales);
+
+    let listaResumen = [];
+    for (let clave in agrupado) {
+        if (Object.prototype.hasOwnProperty.call(agrupado, clave)) {
+            listaResumen.push(agrupado[clave]);
+        }
+    }
+    listaResumen.sort(function (a, b) {
+        return b.nombre.localeCompare(a.nombre, "es");
+    });
+
+    let totalGlobal = 0;
+    let totalNumeroDonaciones = 0;
+    for (let i = 0; i < listaResumen.length; i++) {
+        totalGlobal += listaResumen[i].importeTotal;
+        totalNumeroDonaciones += listaResumen[i].numDonaciones;
+    }
+    let mediaGlobal = totalNumeroDonaciones > 0 ? (totalGlobal / totalNumeroDonaciones) : 0;
+
+    let zonaResultados = document.getElementById("Resultados");
+    zonaResultados.innerHTML = "";
+
+    let parrafoFecha = document.createElement("p"); 
+    parrafoFecha.textContent = "Fecha de compra: " + formatearFechaHoraCompleta(fechaFin);
+    zonaResultados.appendChild(parrafoFecha);
+
+    for (let j = 0; j < listaResumen.length; j++) {
+        let o = listaResumen[j];
+        let mediaOrg = o.numDonaciones > 0 ? (o.importeTotal / o.numDonaciones) : 0;
+        let linea = document.createElement("p"); 
+        linea.textContent = o.nombre + " ---- " + o.numDonaciones + " donaciones --- " +
+            formatearDinero2(mediaOrg) + "€ -- " + formatearDinero2(o.importeTotal) + "€";
+        zonaResultados.appendChild(linea);
+    }
+
+let lineaTotal = document.createElement("p"); 
+lineaTotal.textContent = "Aporte total : " + formatearDinero2(totalGlobal) + " €";
+zonaResultados.appendChild(lineaTotal);
+let lineaMedia = document.createElement("p"); 
+lineaMedia.textContent = "Aporte medio: " + formatearDinero3(mediaGlobal) + " €/donación";
+zonaResultados.appendChild(lineaMedia);
+
+}
