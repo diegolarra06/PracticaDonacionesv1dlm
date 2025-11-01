@@ -38,3 +38,28 @@ return {
     ambito: !esPersonas ? (org.ambito || null) : null
     };
 }
+/* ENUNCIADO 4.1: Sustituir precios por input numérico*/
+function prepararTarjetasConInputs() {
+let tarjetas = document.querySelectorAll("#contenedorPrincipal .OrganizacionesBeneficas");
+for (let i = 0; i < tarjetas.length; i++) {
+    let tarjeta = tarjetas[i];
+    let zonaPrecio = tarjeta.querySelector(".PrecioAportacion");
+    zonaPrecio.textContent = "";
+    let input = document.createElement("input");
+    input.type = "number";
+    input.min = "0";
+    input.step = "0.01";
+    input.placeholder = "€";
+    input.className = "PrecioAportacion";
+    zonaPrecio.appendChild(input);
+    let imagen = tarjeta.querySelector(".logoImagen");
+    imagen.addEventListener("click", function () {
+        let nombreOrg = tarjeta.querySelector(".nombreCausasBeneficas").textContent.trim();
+        let cantidad = parseFloat(input.value);
+            if (!isNaN(cantidad) && cantidad > 0) {
+                registrarDonacion(nombreOrg, cantidad);
+                input.value = "";
+            }
+        });
+    }
+}
