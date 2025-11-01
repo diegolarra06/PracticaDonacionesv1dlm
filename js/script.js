@@ -163,4 +163,13 @@ let lineaMedia = document.createElement("p");
 lineaMedia.textContent = "Aporte medio: " + formatearDinero3(mediaGlobal) + " €/donación";
 zonaResultados.appendChild(lineaMedia);
 
+    // ENUNCIADO 6
+    let mensajes = construirMensajesPeculiaridades(listaResumen.map(function (x) { return x.nombre; }));
+    alert(mensajes.join("\n"));
+
+    // ENUNCIADO 2 (JSON)
+    guardarTramiteComoJson(fechaFin, listaResumen);
+
+    // ENUNCIADO 7: limpieza total a los 10s
+    setTimeout(reiniciarTodo, 10000);
 }
