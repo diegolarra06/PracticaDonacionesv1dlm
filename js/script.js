@@ -13,7 +13,7 @@ botonFinal.addEventListener("click", finalizarTramite);
 }
 /* ENUNCIADO 1-3: Cargar JSON (AJAX con fetch)*/
 function cargarDatosDesdeJson() {
-return fetch("").then(function (respuesta) {
+return fetch("../data/donaciones.json").then(function (respuesta) {
 return respuesta.json();
 })
 .then(function (datos) {
