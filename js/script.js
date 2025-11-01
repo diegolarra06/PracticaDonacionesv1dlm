@@ -202,5 +202,22 @@ let mensajes = [];
     }
 }
 return mensajes;
-
+}
+/* ENUNCIADO 2.4 (JSON): Guardado de los datos del trámite en JSON */
+function guardarTramiteComoJson(fechaFin, listaResumen) {
+let tramite = {
+id: identificadorTramite++,
+fecha: formatearMesAnio(fechaFin),
+donaciones: listaResumen.map(function (o) {
+let ref = buscarOrganizacionPorNombre(o.nombre);
+let idRef = ref ? ref.id : o.nombre;
+return {
+idOrganizacion: idRef, importeTotal: aplicarRedondeoHaciaAbajoDosDecimales(o.importeTotal), numDonaciones: o.numDonaciones
+    };
+})
+};
+let anterior = localStorage.getItem("historialTramites");
+let lista = anterior ? JSON.parse(anterior) : [];
+lista.push(tramite);
+localStorage.setItem("historialTramites", JSON.stringify(lista));
 }
