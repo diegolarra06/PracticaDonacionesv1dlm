@@ -60,7 +60,28 @@ h1 {
     color: #464646;
     box-shadow: 1px 2px 8px #272727;
     text-align: center;
-    
+}
+.LateralDerecho{
+    position: fixed;
+    right: 20px;
+    top: 110px;
+    width: 25%;
+    min-width: 260px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+    box-shadow: 1px 2px 8px #ddd;
+    height: calc(100vh - 140px);
+    overflow: hidden; 
+}
+.LineaDonacion{ 
+    padding: 4px 6px; 
+    border-radius: 4px; 
+    margin-bottom: 4px;
+ }
+.LineaDonacion--resaltada{ 
+    background: #e0f2ff; 
 }
 #botonFinal {
     display: block;
