@@ -221,3 +221,37 @@ let lista = anterior ? JSON.parse(anterior) : [];
 lista.push(tramite);
 localStorage.setItem("historialTramites", JSON.stringify(lista));
 }
+function reiniciarTodo() {
+let lista = document.getElementById("listaDonaciones");
+let resultados = document.getElementById("Resultados");
+lista.innerHTML = "";
+resultados.innerHTML = "";
+donacionesActuales = [];
+ultimoIdResaltado = null;
+}
+function formatearFechaHoraCompleta(fecha) {
+let dia = String(fecha.getDate()).padStart(2, "0");
+let mes = String(fecha.getMonth() + 1).padStart(2, "0");
+let anio = fecha.getFullYear();
+let hora = String(fecha.getHours()).padStart(2, "0");
+let minutos = String(fecha.getMinutes()).padStart(2, "0");
+return dia + "/" + mes + "/" + anio + " " + hora + ":" + minutos;
+}
+function formatearMesAnio(fecha) {
+let mes = String(fecha.getMonth() + 1).padStart(2, "0");
+let anio = fecha.getFullYear();
+ return mes + "/" + anio;
+}
+function aplicarRedondeoHaciaAbajoDosDecimales(valor) {
+    return Math.floor(valor * 100) / 100;
+}
+function formatearDinero2(valor) {
+let v = aplicarRedondeoHaciaAbajoDosDecimales(valor);
+ return v.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function formatearDinero3(valor) {
+return Number(valor).toLocaleString("es-ES", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+}
+document.addEventListener("DOMContentLoaded", function () {
+iniciarAplicacion();
+});
