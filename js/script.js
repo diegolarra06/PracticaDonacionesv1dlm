@@ -12,7 +12,7 @@ function iniciarAplicacion() {
         });
 }
 function cargarDatosDesdeJson() {
-return fetch("../data/donaciones.json").then(function (response) {
+return fetch("http://localhost:3000/organizaciones").then(function (response) {
     if (response.ok) {
     return response.json(); 
     } else {
