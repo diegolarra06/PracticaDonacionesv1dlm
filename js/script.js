@@ -4,27 +4,44 @@ let ultimoIdResaltado = null;
 let identificadorTramite = 1;    
 
 function iniciarAplicacion() {
-cargarDatosDesdeJson()
-.then(function () {
-prepararTarjetasConInputs();
-let botonFinal = document.getElementById("botonFinal");
-botonFinal.addEventListener("click", finalizarTramite);
-});
+    cargarDatosDesdeJson()
+        .then(function () {
+            prepararTarjetasConInputs();
+            let botonFinal = document.getElementById("botonFinal");
+            botonFinal.addEventListener("click", finalizarTramite);
+        });
 }
-/* ENUNCIADO 1-3: Cargar JSON (AJAX con fetch)*/
 function cargarDatosDesdeJson() {
-return fetch("../data/donaciones.json").then(function (respuesta) {
-return respuesta.json();
+return fetch("../data/donaciones.json").then(function (response) {
+    if (response.ok) {
+    return response.json(); 
+    } else {
+    throw new Error("Error HTTP: " + response.status + " (" + response.statusText + ")");
+    }
+    })
+    .then(function (datos) {
+    listaOrganizaciones = (datos.organizaciones || []).map(function (org) {
+    return normalizarOrganizacion(org);
+    });
 })
-.then(function (datos) {
-listaOrganizaciones = (datos.organizaciones || []).map(function (org) {
-return normalizarOrganizacion(org);
-});
-})
-.catch(function () {
-listaOrganizaciones = [];
-});
+    .catch(function (error) {
+    console.error("Error al cargar los datos del JSON:", error);
+    listaOrganizaciones = [];
+        });
 }
+function normalizarOrganizacion(org) {
+    let esPersonas = (typeof org.acogida !== "undefined") || (typeof org.rangoEdad !== "undefined");
+    return {
+        id: org.id,
+        nombre: org.nombre,
+        tipo: esPersonas ? "personas" : "animales",
+        acogida: esPersonas ? !!org.acogida : null,
+        rangoEdad: esPersonas ? (org.rangoEdad || null) : null,
+        multiraza: !esPersonas ? !!org.multiraza : null,
+        ambito: !esPersonas ? (org.ambito || null) : null
+    };
+}
+
 
 function normalizarOrganizacion(org) {
 let esPersonas = (typeof org.acogida !== "undefined") || (typeof org.rangoEdad !== "undefined");
@@ -38,7 +55,6 @@ multiraza: !esPersonas ? !!org.multiraza : null,
 ambito: !esPersonas ? (org.ambito || null) : null
 };
 }
-/* ENUNCIADO 4.1: Sustituir precios por input numérico*/
 function prepararTarjetasConInputs() {
 let tarjetas = document.querySelectorAll("#contenedorPrincipal .OrganizacionesBeneficas");
 for (let i = 0; i < tarjetas.length; i++) {
@@ -63,7 +79,7 @@ imagen.addEventListener("click", function () {
         });
     }
 }
-/* ENUNCIADO 4.2: Lateral con acumulación y sombreado dinámico*/
+
 function registrarDonacion(nombreOrganizacion, cantidad) {
 let organizacion = buscarOrganizacionPorNombre(nombreOrganizacion);
 let idOrg = organizacion ? organizacion.id : "NOMBRE_NO_EN_JSON";
@@ -112,8 +128,6 @@ let nombreMayus = (nombre || "").toLocaleUpperCase();
     }
     return null;
 }
-/* 
-   ENUNCIADO 4.4 y 4.5: Finalizar trámite, mostrar resultados ordenados e importes */
 function finalizarTramite() {
 if (donacionesActuales.length === 0) {
     return;
@@ -156,12 +170,12 @@ zonaResultados.appendChild(lineaTotal);
 let lineaMedia = document.createElement("p"); 
 lineaMedia.textContent = "Aporte medio: " + formatearDinero3(mediaGlobal) + " €/donación";
 zonaResultados.appendChild(lineaMedia);
-// ENUNCIADO 6
+
 let mensajes = construirMensajesPeculiaridades(listaResumen.map(function (x) { return x.nombre; }));
 alert(mensajes.join("\n"));
-// ENUNCIADO 2 (JSON)
+
 guardarTramiteComoJson(fechaFin, listaResumen);
-// ENUNCIADO 7: limpieza total a los 10s
+
 setTimeout(reiniciarTodo, 10000);
 }
 
@@ -203,7 +217,7 @@ let mensajes = [];
 }
 return mensajes;
 }
-/* ENUNCIADO 2.4 (JSON): Guardado de los datos del trámite en JSON */
+
 function guardarTramiteComoJson(fechaFin, listaResumen) {
 let tramite = {
 id: identificadorTramite++,
