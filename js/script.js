@@ -136,8 +136,8 @@ let fechaFin = new Date();
 let agrupado = agruparDonacionesPorOrganizacion(donacionesActuales);
 let listaResumen = [];
 for (let clave in agrupado) {
-    if (Object.prototype.hasOwnProperty.call(agrupado, clave)) {
-        listaResumen.push(agrupado[clave]);
+    if (agrupado[clave]) {
+    listaResumen.push(agrupado[clave]);
     }
 }
 listaResumen.sort(function (a, b) {
