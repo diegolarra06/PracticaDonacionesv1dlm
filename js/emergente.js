@@ -9,7 +9,55 @@ window.onload = function () {
     mostrarResumenEnEmergente();
 };
 
+function mostrarResumenEnEmergente() {
 
+    let datosFormulario = JSON.parse(sessionStorage.getItem("datosFormulario"));
+    let resumenDonaciones = JSON.parse(sessionStorage.getItem("resumenDonaciones"));
+
+    let divDatosUsuario = document.getElementById("datosUsuario");
+    let divResumenDonaciones = document.getElementById("resumenDonaciones");
+
+    divDatosUsuario.innerHTML = "";
+    divResumenDonaciones.innerHTML = "";
+
+    let pNombre = document.createElement("p");
+    pNombre.textContent = "Nombre: " + datosFormulario.nombre + " " + datosFormulario.apellidos;
+    divDatosUsuario.appendChild(pNombre);
+
+    let pDireccion = document.createElement("p");
+    pDireccion.textContent = "Dirección: " + datosFormulario.direccion;
+    divDatosUsuario.appendChild(pDireccion);
+
+    let pCorreo = document.createElement("p");
+    pCorreo.textContent = "Correo electrónico: " + datosFormulario.correo;
+    divDatosUsuario.appendChild(pCorreo);
+
+    let pPago = document.createElement("p");
+    pPago.textContent = "Forma de pago: " + datosFormulario.formaPago;
+    divDatosUsuario.appendChild(pPago);
+
+    if (datosFormulario.esSocio === "si") {
+        let pSocio = document.createElement("p");
+        pSocio.textContent = "Código de socio: " + datosFormulario.codigoSocio;
+        divDatosUsuario.appendChild(pSocio);
+    }
+
+    let tituloDonaciones = document.createElement("h3");
+    tituloDonaciones.textContent = "Donaciones realizadas:";
+    divResumenDonaciones.appendChild(tituloDonaciones);
+
+    for (let i = 0; i < resumenDonaciones.length; i++) {
+        let d = resumenDonaciones[i];
+
+        let linea = document.createElement("p");
+        linea.textContent =
+            d.nombre + ": " +
+            d.numeroDonaciones + " donaciones — Total: " +
+            d.importeTotal.toFixed(2) + " €";
+
+        divResumenDonaciones.appendChild(linea);
+    }
+}
 
 function finalizarPedido() {
 let datosFormulario = JSON.parse(sessionStorage.getItem("datosFormulario"));

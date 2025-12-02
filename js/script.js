@@ -306,7 +306,7 @@ let resumenDonaciones = construirResumenDeDonaciones();
 sessionStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
 sessionStorage.setItem("resumenDonaciones", JSON.stringify(resumenDonaciones));
 
-let opcionesVentana = "width=500,height=300,menubar=no,toolbar=no,location=no";
+let opcionesVentana = "width=500,height=300,menubar=no,toolbar=no,location=no,status=no";
 window.open("VentanaEmergente.html", "ventanaResumen", opcionesVentana);
 }
 
