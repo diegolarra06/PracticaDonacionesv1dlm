@@ -257,6 +257,28 @@ function obtenerLabelDeCampo(idCampo) {
     return document.querySelector('label[for="' + idCampo + '"]');
 }
 
+function abrirVentanaEmergenteConDatos() {
+let datosFormulario = obtenerDatosDelFormulario();
+let resumenDonaciones = construirResumenDeDonaciones();
+
+sessionStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
+sessionStorage.setItem("resumenDonaciones", JSON.stringify(resumenDonaciones));
+
+let opcionesVentana = "width=500,height=300,menubar=no,toolbar=no,location=no";
+window.open("./VentanaEmergente.html", "ventanaResumen", opcionesVentana);
+}
+
+
+
+
+function reiniciarPaginaTrasTramite() {
+donacionesActuales = [];
+ultimoIdResaltado = null;
+document.getElementById("listaDonaciones").innerHTML = "";
+let formulario = document.getElementById("formularioDonacion");
+formulario.reset();
+limpiarFormularioYOcultarCodigoSocio();
+}
 
 
 function formatearFechaHoraCompleta(fecha) {
