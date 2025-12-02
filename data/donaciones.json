@@ -1,82 +1,32 @@
 {
-  "organizaciones": [
-    {
-      "id": 1,
-      "nombre": "Médicos Sin Fronteras",
-      "acogida": false,
-      "rangoEdad": "todas las edades"
-    },
-    {
-      "id": 2,
-      "nombre": "Cruz Roja",
-      "acogida": true,
-      "rangoEdad": "adultos"
-    },
-    {
-      "id": 3,
-      "nombre": "UNICEF",
-      "acogida": false,
-      "rangoEdad": "infancia"
-    },
-    {
-      "id": 4,
-      "nombre": "Cáritas",
-      "acogida": true,
-      "rangoEdad": "todas las edades"
-    },
-    {
-      "id": 5,
-      "nombre": "Greenpeace",
-      "multiraza": false,
-      "ambito": "medioambiental"
-    },
-    {
-      "id": 6,
-      "nombre": "WWF",
-      "multiraza": true,
-      "ambito": "internacional"
-    },
-    {
-      "id": 7,
-      "nombre": "Manos Unidas",
-      "acogida": true,
-      "rangoEdad": "personas desfavorecidas"
-    },
-    {
-      "id": 8,
-      "nombre": "Oxfam",
-      "multiraza": true,
-      "ambito": "internacional"
-    },
-    {
-      "id": 9,
-      "nombre": "Ayuda en Acción",
-      "acogida": false,
-      "rangoEdad": "infancia"
-    },
-    {
-      "id": 10,
-      "nombre": "Fundación CEPAIM",
-      "acogida": true,
-      "rangoEdad": "inmigrantes"
-    }
-  ],
-  "donaciones": [
-    {
-      "idTramite": 1,
-      "fecha": "11/2025",
-      "detalle": [
-        {
-          "idOrganizacion": 1,
-          "importeTotal": 45.78,
-          "numDonaciones": 5
+    "organizaciones": [{
+            "id": "1",
+            "nombre": "UNICEF",
+            "acogida": false,
+            "rangoEdad": "infancia",
+            "imagen": "./img/imagen1.jpeg"
         },
         {
-          "idOrganizacion": 2,
-          "importeTotal": 37.23,
-          "numDonaciones": 2
+            "id": "2",
+            "nombre": "WWF",
+            "multiraza": true,
+            "ambito": "internacional",
+            "imagen": "./img/imagen1.jpeg"
         }
-      ]
-    }
-  ]
+    ],
+    "tramiteDonacion": [{
+        "id": "1",
+        "fecha": "11/2025",
+        "donaciones": [{
+                "idOrganizacion": "1",
+                "importeTotal": 45.78,
+                "numDonaciones": 5
+            },
+            {
+                "idOrganizacion": "2",
+                "importeTotal": 37.23,
+                "numDonaciones": 2
+            }
+        ]
+    }]
 }

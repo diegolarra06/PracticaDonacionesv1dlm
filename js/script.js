@@ -4,13 +4,12 @@ let ultimoIdResaltado = null;
 let identificadorTramite = 1;    
 
 function iniciarAplicacion() {
-    cargarDatosDesdeJson()
+    cargarOrganizacionesDesdeJson()
         .then(function () {
-            prepararTarjetasConInputs();
-            let botonFinal = document.getElementById("botonFinal");
-            botonFinal.addEventListener("click", finalizarTramite);
+            crearTarjetasOrganizaciones();
         });
 }
+
 function cargarDatosDesdeJson() {
 return fetch("http://localhost:3000/organizaciones").then(function (response) {
     if (response.ok) {
@@ -42,19 +41,6 @@ function normalizarOrganizacion(org) {
     };
 }
 
-
-function normalizarOrganizacion(org) {
-let esPersonas = (typeof org.acogida !== "undefined") || (typeof org.rangoEdad !== "undefined");
-return {
-id: org.id,
-nombre: org.nombre,
-tipo: esPersonas ? "personas" : "animales",
-acogida: esPersonas ? !!org.acogida : null,
-rangoEdad: esPersonas ? (org.rangoEdad || null) : null,
-multiraza: !esPersonas ? !!org.multiraza : null,
-ambito: !esPersonas ? (org.ambito || null) : null
-};
-}
 function prepararTarjetasConInputs() {
 let tarjetas = document.querySelectorAll("#contenedorPrincipal .OrganizacionesBeneficas");
 for (let i = 0; i < tarjetas.length; i++) {
