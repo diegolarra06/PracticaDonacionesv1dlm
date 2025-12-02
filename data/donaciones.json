@@ -2,7 +2,7 @@
   "organizaciones": [
     {
       "id": "1",
-      "nombre": "unicef",
+      "nombre": "UNICEF",
       "acogida": false,
       "rangoEdad": "infancia",
       "imagen": "../img/UNICEF.webp"
@@ -27,8 +27,49 @@
       "acogida": true,
       "rangoEdad": "todas las edades",
       "imagen": "../img/CARITAS.jfif"
+    },
+    {
+      "id": 5,
+      "nombre": "Cruz Roja",
+      "acogida": true,
+      "rangoEdad": "adultos",
+      "imagen": "../img/cruzRoja.png"
+    },
+    {
+      "id": 6,
+      "nombre": "Greenpeace",
+      "multiraza": false,
+      "ambito": "medioambiental",
+      "imagen": "../img/greenpeace-600x599.png"
+    },
+{
+      "id": 7,
+      "nombre": "Manos Unidas",
+      "acogida": true,
+      "rangoEdad": "personas desfavorecidas",
+      "imagen": "../img/manos unidas.png"
+    },
+    {
+      "id": 8,
+      "nombre": "Oxfam",
+      "multiraza": true,
+      "ambito": "internacional",
+      "imagen": "../img/oxfam.jpg"
+    },
+    {
+      "id": 9,
+      "nombre": "Ayuda en Acción",
+      "acogida": false,
+      "rangoEdad": "infancia",
+      "imagen": "../img/ayuda-en-accion-logo.jpg"
+    },
+    {
+      "id": 10,
+      "nombre": "Fundación CEPAIM",
+      "acogida": true,
+      "rangoEdad": "inmigrantes",
+      "imagen": "../img/Cepaim logo.png"
     }
-  
   ],
   "tramiteDonacion": [
     {
