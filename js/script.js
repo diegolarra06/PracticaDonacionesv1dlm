@@ -7,6 +7,7 @@ function iniciarAplicacion() {
     cargarOrganizacionesDesdeJson()
         .then(function () {
             crearTarjetasOrganizaciones();
+            registrarEventosDelFormulario();
         });
 }
 /* Cargar organizaciones desde json-server */
@@ -153,6 +154,42 @@ let nombreMayus = (nombre || "").toLocaleUpperCase();
     }
     return null;
 }
+/* SECCIÓN DE FORMULARIO DE DONACIÓN */
+
+function registrarEventosDelFormulario() {
+    let formulario = document.getElementById("formularioDonacion");
+    let radiosSocio = document.getElementsByName("esSocio");
+    for (let i = 0; i < radiosSocio.length; i++) {
+        radiosSocio[i].addEventListener("change", gestionarVisibilidadCodigoSocio);
+    }
+    let botonLimpiar = document.getElementById("botonLimpiarFormulario");
+    botonLimpiar.addEventListener("click", limpiarFormularioYOcultarCodigoSocio);
+    formulario.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        console.log("Formulario enviado (lógica de validación se añadirá en la siguiente parte)");
+    });
+}
+
+function gestionarVisibilidadCodigoSocio() {
+    let campoCodigoSocio = document.getElementById("contenedorCampoCodigoSocio");
+
+    let opcionSeleccionada = document.querySelector('input[name="esSocio"]:checked');
+
+    if (opcionSeleccionada && opcionSeleccionada.value === "si") {
+        campoCodigoSocio.classList.remove("oculto");
+    } else {
+        campoCodigoSocio.classList.add("oculto");
+        document.getElementById("codigoSocio").value = "";  
+    }
+}
+
+function limpiarFormularioYOcultarCodigoSocio() {
+    let campoCodigoSocio = document.getElementById("contenedorCampoCodigoSocio");
+
+    campoCodigoSocio.classList.add("oculto");
+    document.getElementById("codigoSocio").value = "";
+}
+
 
 function formatearFechaHoraCompleta(fecha) {
 let dia = String(fecha.getDate()).padStart(2, "0");
