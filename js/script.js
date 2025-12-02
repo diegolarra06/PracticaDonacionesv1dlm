@@ -1,11 +1,10 @@
 let listaOrganizaciones = [];    
 let donacionesActuales = [];    
 let ultimoIdResaltado = null;     
-let identificadorTramite = 1;    
-
+   
+document.addEventListener("DOMContentLoaded", iniciarAplicacion);
 function iniciarAplicacion() {
-    cargarOrganizacionesDesdeJson()
-        .then(function () {
+    cargarOrganizacionesDesdeJson().then( () => {
             crearTarjetasOrganizaciones();
             registrarEventosDelFormulario();
         });
@@ -41,7 +40,6 @@ function normalizarOrganizacion(organizacionOriginal) {
     let esOrganizacionDePersonas =
         typeof organizacionOriginal.acogida !== "undefined" ||
         typeof organizacionOriginal.rangoEdad !== "undefined";
-
     return {
         id: String(organizacionOriginal.id), 
         nombre: organizacionOriginal.nombre,
@@ -192,7 +190,6 @@ function limpiarFormularioYOcultarCodigoSocio() {
 }
 
 function validarFormulario(evento) {
-
     let formulario = document.getElementById("formularioDonacion");
     let listaErrores = [];
     restaurarColorLabels();
@@ -227,6 +224,7 @@ function validarFormulario(evento) {
     return true;
 }
 
+
 function validarRadios(nombreGrupo, nombreMostrar, listaErrores) {
     let opciones = document.getElementsByName(nombreGrupo);
     let algunaMarcada = false;
@@ -254,6 +252,53 @@ function obtenerLabelDeCampo(idCampo) {
     return document.querySelector('label[for="' + idCampo + '"]');
 }
 
+function obtenerDatosDelFormulario() {
+    let datos = {};
+
+    datos.nombre = document.getElementById("nombreDonante").value.trim();
+    datos.apellidos = document.getElementById("apellidosDonante").value.trim();
+    datos.direccion = document.getElementById("direccionDonante").value.trim();
+    datos.correo = document.getElementById("correoElectronicoDonante").value.trim();
+
+    let formaPago = document.querySelector('input[name="formaPago"]:checked');
+    datos.formaPago = formaPago ? formaPago.value : "";
+
+    let esSocio = document.querySelector('input[name="esSocio"]:checked');
+    datos.esSocio = esSocio ? esSocio.value : "";
+
+    datos.codigoSocio = document.getElementById("codigoSocio").value.trim();
+
+    return datos;
+}
+
+
+function construirResumenDeDonaciones() {
+    let listaResumen = [];
+
+    for (let i = 0; i < donacionesActuales.length; i++) {
+        let donacion = donacionesActuales[i];
+        let encontrado = null;
+        for (let j = 0; j < listaResumen.length; j++) {
+            if (listaResumen[j].idOrganizacion === donacion.idOrganizacion) {
+                encontrado = listaResumen[j];
+                break;
+            }
+        }
+        if (encontrado === null) {
+            encontrado = {
+                idOrganizacion: donacion.idOrganizacion,
+                nombre: donacion.nombre,
+                importeTotal: 0,
+                numeroDonaciones: 0
+            };
+            listaResumen.push(encontrado);
+        }
+        encontrado.importeTotal += donacion.cantidad;
+        encontrado.numeroDonaciones++;
+    }
+    return listaResumen;
+}
+
 function abrirVentanaEmergenteConDatos() {
 let datosFormulario = obtenerDatosDelFormulario();
 let resumenDonaciones = construirResumenDeDonaciones();
@@ -262,7 +307,7 @@ sessionStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
 sessionStorage.setItem("resumenDonaciones", JSON.stringify(resumenDonaciones));
 
 let opcionesVentana = "width=500,height=300,menubar=no,toolbar=no,location=no";
-window.open("./src/VentanaEmergente.html", "ventanaResumen", opcionesVentana);
+window.open("VentanaEmergente.html", "ventanaResumen", opcionesVentana);
 }
 
 function reiniciarPaginaTrasTramite() {

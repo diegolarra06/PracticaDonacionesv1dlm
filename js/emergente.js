@@ -9,43 +9,7 @@ window.onload = function () {
     mostrarResumenEnEmergente();
 };
 
-function mostrarResumenEnEmergente() {
 
-let datosFormulario = JSON.parse(sessionStorage.getItem("datosFormulario"));
-let resumenDonaciones = JSON.parse(sessionStorage.getItem("resumenDonaciones"));
-
-let contenedor = document.getElementById("contenedorResumen");
-    contenedor.innerHTML = "";
-
-let pNombre = document.createElement("p");
-pNombre.textContent = "Nombre: " + datosFormulario.nombre + " " + datosFormulario.apellidos;
-contenedor.appendChild(pNombre);
-
-let pCorreo = document.createElement("p");
-pCorreo.textContent = "Correo electrónico: " + datosFormulario.correo;
-contenedor.appendChild(pCorreo);
-
-let pPago = document.createElement("p");
-pPago.textContent = "Forma de pago: " + datosFormulario.formaPago;
-contenedor.appendChild(pPago);
-
-if (datosFormulario.esSocio === "si") {
-    let pSocio = document.createElement("p");
-    pSocio.textContent = "Código de socio: " + datosFormulario.codigoSocio;
-    contenedor.appendChild(pSocio);
-}
-
-let tituloDonaciones = document.createElement("h3");
-tituloDonaciones.textContent = "Donaciones realizadas:";
-contenedor.appendChild(tituloDonaciones);
-
-for (let i = 0; i < resumenDonaciones.length; i++) {
-    let d = resumenDonaciones[i];
-    let linea = document.createElement("p");
-    linea.textContent = d.nombre + ": " + d.numeroDonaciones + " donaciones — Total: " + d.importeTotal.toFixed(2) + " €";
-        contenedor.appendChild(linea);
-    }
-}
 
 function finalizarPedido() {
 let datosFormulario = JSON.parse(sessionStorage.getItem("datosFormulario"));
