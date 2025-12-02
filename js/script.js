@@ -190,6 +190,60 @@ function limpiarFormularioYOcultarCodigoSocio() {
     document.getElementById("codigoSocio").value = "";
 }
 
+/*  VALIDACIÓN DEL FORMULARIO DE DONACIÓN */
+
+function validarFormulario(evento) {
+
+    let formulario = document.getElementById("formularioDonacion");
+    let listaErrores = [];
+    restaurarColorLabels();
+    let campos = [
+        { id: "nombreDonante", mensajePersonal: null },
+        { id: "apellidosDonante", mensajePersonal: null },
+        { id: "direccionDonante", mensajePersonal: null },
+        { id: "correoElectronicoDonante", mensajePersonal: null },
+        { id: "codigoSocio", mensajePersonal: "El código de socio no cumple el formato requerido." }
+    ];
+    for (let i = 0; i < campos.length; i++) {
+
+        let campo = document.getElementById(campos[i].id);
+        let labelCampo = obtenerLabelDeCampo(campos[i].id);
+        if (campo.parentElement.classList.contains("oculto")) {
+        continue;
+        }
+        if (!campo.validity.valid) {
+            labelCampo.style.color = "red";
+            let mensaje = campos[i].mensajePersonal || campo.validationMessage || "Este campo no es válido.";
+            listaErrores.push(labelCampo.textContent + ": " + mensaje);
+        }
+    }
+    validarRadios("formaPago", "Forma de pago", listaErrores);
+    validarRadios("esSocio", "¿Tiene tarjeta de socio?", listaErrores);
+    if (listaErrores.length > 0) {
+        evento.preventDefault();
+        alert(listaErrores.join("\n"));
+        return false;
+    }
+    console.log("Formulario correcto. Pasando a ventana emergente..");
+    return true;
+}
+
+function validarRadios(nombreGrupo, nombreMostrar, listaErrores) {
+    let opciones = document.getElementsByName(nombreGrupo);
+    let algunaMarcada = false;
+    for (let i = 0; i < opciones.length; i++) {
+        if (opciones[i].checked) {
+        algunaMarcada = true;
+        break;
+        }
+    }
+    if (!algunaMarcada) {
+        listaErrores.push(nombreMostrar + ": Debe seleccionar una opción.");
+        let label = opciones[0].closest("fieldset").querySelector("legend");
+        label.style.color = "red";
+    }
+}
+
 
 function formatearFechaHoraCompleta(fecha) {
 let dia = String(fecha.getDate()).padStart(2, "0");
