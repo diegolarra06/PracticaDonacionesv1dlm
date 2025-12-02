@@ -13,58 +13,58 @@
       "multiraza": true,
       "ambito": "internacional",
       "imagen": "../img/wwf.webp"
-    } ,
+    },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Médicos Sin Fronteras",
       "acogida": false,
       "rangoEdad": "todas las edades",
       "imagen": "../img/medicossinfrontera.jpg"
     },
-{
-      "id": 4,
+    {
+      "id": "4",
       "nombre": "Cáritas",
       "acogida": true,
       "rangoEdad": "todas las edades",
       "imagen": "../img/CARITAS.jfif"
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Cruz Roja",
       "acogida": true,
       "rangoEdad": "adultos",
       "imagen": "../img/cruzRoja.png"
     },
     {
-      "id": 6,
+      "id": "6",
       "nombre": "Greenpeace",
       "multiraza": false,
       "ambito": "medioambiental",
       "imagen": "../img/greenpeace-600x599.png"
     },
-{
-      "id": 7,
+    {
+      "id": "7",
       "nombre": "Manos Unidas",
       "acogida": true,
       "rangoEdad": "personas desfavorecidas",
       "imagen": "../img/manos unidas.png"
     },
     {
-      "id": 8,
+      "id": "8",
       "nombre": "Oxfam",
       "multiraza": true,
       "ambito": "internacional",
       "imagen": "../img/oxfam.jpg"
     },
     {
-      "id": 9,
+      "id": "9",
       "nombre": "Ayuda en Acción",
       "acogida": false,
       "rangoEdad": "infancia",
       "imagen": "../img/ayuda-en-accion-logo.jpg"
     },
     {
-      "id": 10,
+      "id": "10",
       "nombre": "Fundación CEPAIM",
       "acogida": true,
       "rangoEdad": "inmigrantes",
@@ -109,6 +109,71 @@
         {
           "idOrganizacion": "2",
           "importeTotal": 0.2,
+          "numDonaciones": 1
+        }
+      ]
+    },
+    {
+      "id": "592b",
+      "fecha": "12/2025",
+      "datosUsuario": {
+        "nombre": "Arturo",
+        "apellidos": "Palomino",
+        "direccion": "Calle Madrid",
+        "correo": "correo1@gmail.com",
+        "formaPago": "tarjeta",
+        "esSocio": "no",
+        "codigoSocio": ""
+      },
+      "donaciones": [
+        {
+          "idOrganizacion": "1",
+          "importeTotal": 0.43,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "2",
+          "importeTotal": 0.25,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "3",
+          "importeTotal": 0.62,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "4",
+          "importeTotal": 5,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "5",
+          "importeTotal": 7,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "6",
+          "importeTotal": 9,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "7",
+          "importeTotal": 6,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "8",
+          "importeTotal": 8,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "9",
+          "importeTotal": 24,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "10",
+          "importeTotal": 10,
           "numDonaciones": 1
         }
       ]
