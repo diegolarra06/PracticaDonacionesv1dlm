@@ -10,107 +10,98 @@
 </head>
 <body>
     <h1>Aportaciones a Causas Benéficas</h1>
-    
-    <div id="contenedorPrincipal" class="CentrarOrganizaciones">
-             
-    <aside id="zonaLateral" class="LateralDerecho">
-        <h3>Donaciones registradas</h3>
-        <div id="listaDonaciones" aria-live="polite"></div>
-    </aside>
-    <section id="seccionFormularioDonacion">
-        <h2>Datos para la donación</h2>
+ 
+<div id="contenedorPrincipal" class="CentrarOrganizaciones">
+   
+</div>
 
-        <form id="formularioDonacion" action="#" method="get" novalidate>
-            <div class="campoFormulario">
-                <label for="nombreDonante">Nombre</label>
-                <input
-                    type="text"
-                    id="nombreDonante"
-                    name="nombreDonante"
-                    required
-                    minlength="4"
-                    maxlength="15">
-            </div>
-            <div class="campoFormulario">
-                <label for="apellidosDonante">Apellidos</label>
-                <input
-                    type="text"
-                    id="apellidosDonante"
-                    name="apellidosDonante"
-                    required>
-            </div>
-            <div class="campoFormulario">
-                <label for="direccionDonante">Dirección</label>
-                <input
-                    type="text"
-                    id="direccionDonante"
-                    name="direccionDonante"
-                    required>
-            </div>
-            <div class="campoFormulario">
-                <label for="correoElectronicoDonante">Correo electrónico</label>
-                <input
-                    type="email"
-                    id="correoElectronicoDonante"
-                    name="correoElectronicoDonante"
-                    required>
-            </div>
-            <fieldset class="grupoRadios">
-                <legend>Forma de pago</legend>
-                <label>
-                    <input
-                        type="radio"
-                        name="formaPago"
-                        value="tarjeta"
-                        required>
-                    Tarjeta
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="formaPago"
-                        value="transferencia"
-                        required>
-                    Transferencia
-                </label>
-            </fieldset>
-            <fieldset class="grupoRadios">
-                <legend>¿Tiene tarjeta de socio?</legend>
-                <label>
-                    <input
-                        type="radio"
-                        name="esSocio"
-                        value="si"
-                        required>
-                    Sí
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="esSocio"
-                        value="no"
-                        required>
-                    No
-                </label>
-            </fieldset>
+<aside id="zonaLateral" class="LateralDerecho">
+    <h3>Donaciones registradas</h3>
+    <div id="listaDonaciones" aria-live="polite"></div>
+</aside>
 
-            <div class="campoFormulario oculto" id="contenedorCampoCodigoSocio">
-                <label for="codigoSocio">Código de socio</label>
-                <input
-                    type="text"
-                    id="codigoSocio"
-                    name="codigoSocio"
-                    pattern="[A-Za-z]{3}[0-9]{4}[\/_.#&]"
-                    minlength="8"
-                    maxlength="8">
-            </div>
+<section id="seccionFormularioDonacion">
+    <h2>Datos para la donación</h2>
 
-            <div class="botonesFormulario">
-                <button type="submit" id="botonRealizarDonacion">Realizar donación</button>
-                <button type="reset" id="botonLimpiarFormulario">Limpiar formulario</button>
-            </div>
-        </form>
-    </section>
+    <form id="formularioDonacion" action="#" method="get" novalidate>
+        <div class="campoFormulario">
+            <label for="nombreDonante">Nombre</label>
+            <input
+                type="text"
+                id="nombreDonante"
+                name="nombreDonante"
+                required
+                minlength="4"
+                maxlength="15">
+        </div>
 
+        <div class="campoFormulario">
+            <label for="apellidosDonante">Apellidos</label>
+            <input
+                type="text"
+                id="apellidosDonante"
+                name="apellidosDonante"
+                required>
+        </div>
+
+        <div class="campoFormulario">
+            <label for="direccionDonante">Dirección</label>
+            <input
+                type="text"
+                id="direccionDonante"
+                name="direccionDonante"
+                required>
+        </div>
+
+        <div class="campoFormulario">
+            <label for="correoElectronicoDonante">Correo electrónico</label>
+            <input
+                type="email"
+                id="correoElectronicoDonante"
+                name="correoElectronicoDonante"
+                required>
+        </div>
+
+        <fieldset class="grupoRadios">
+            <legend>Forma de pago</legend>
+            <label>
+                <input type="radio" name="formaPago" value="tarjeta" required>
+                Tarjeta
+            </label>
+            <label>
+                <input type="radio" name="formaPago" value="transferencia" required>
+                Transferencia
+            </label>
+        </fieldset>
+
+        <fieldset class="grupoRadios">
+            <legend>¿Tiene tarjeta de socio?</legend>
+            <label>
+                <input type="radio" name="esSocio" value="si" required>
+                Sí
+            </label>
+            <label>
+                <input type="radio" name="esSocio" value="no" required>
+                No
+            </label>
+        </fieldset>
+
+        <div class="campoFormulario oculto" id="contenedorCampoCodigoSocio">
+            <label for="codigoSocio">Código de socio</label>
+            <input
+                type="text"
+                id="codigoSocio"
+                name="codigoSocio"
+                pattern="[A-Za-z]{3}[0-9]{4}[\/_.#&]"
+                minlength="8"
+                maxlength="8">
+        </div>
+
+        <div class="botonesFormulario">
+            <button type="submit" id="botonRealizarDonacion">Realizar donación</button>
+            <button type="reset" id="botonLimpiarFormulario">Limpiar formulario</button>
+        </div>
+    </form>
+</section>
 </body>
 </html>

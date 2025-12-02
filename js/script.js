@@ -10,7 +10,7 @@ function iniciarAplicacion() {
             registrarEventosDelFormulario();
         });
 }
-/* Cargar organizaciones desde json-server */
+
 function cargarOrganizacionesDesdeJson() {
     return fetch("http://localhost:3000/organizaciones")
         .then(function (respuesta) {
@@ -36,7 +36,7 @@ function cargarOrganizacionesDesdeJson() {
             listaOrganizaciones = [];
         });
 }
-/*Normalizar la organización (incluyendo la imagen) */
+
 function normalizarOrganizacion(organizacionOriginal) {
     let esOrganizacionDePersonas =
         typeof organizacionOriginal.acogida !== "undefined" ||
@@ -98,7 +98,7 @@ function crearTarjetasOrganizaciones() {
         contenedorOrganizaciones.appendChild(tarjetaOrganizacion);
     }
 }
-/*Ajuste pequeño en registrarDonacion para el scroll (punto 1.3) */
+
 function registrarDonacion(nombreOrganizacion, cantidad) {
     let organizacion = buscarOrganizacionPorNombre(nombreOrganizacion);
     let idOrganizacion = organizacion ? organizacion.id : "NOMBRE_NO_EN_JSON";
@@ -154,7 +154,6 @@ let nombreMayus = (nombre || "").toLocaleUpperCase();
     }
     return null;
 }
-/* SECCIÓN DE FORMULARIO DE DONACIÓN */
 
 function registrarEventosDelFormulario() {
     let formulario = document.getElementById("formularioDonacion");
@@ -191,8 +190,6 @@ function limpiarFormularioYOcultarCodigoSocio() {
     campoCodigoSocio.classList.add("oculto");
     document.getElementById("codigoSocio").value = "";
 }
-
-/*  VALIDACIÓN DEL FORMULARIO DE DONACIÓN */
 
 function validarFormulario(evento) {
 
@@ -265,11 +262,8 @@ sessionStorage.setItem("datosFormulario", JSON.stringify(datosFormulario));
 sessionStorage.setItem("resumenDonaciones", JSON.stringify(resumenDonaciones));
 
 let opcionesVentana = "width=500,height=300,menubar=no,toolbar=no,location=no";
-window.open("./VentanaEmergente.html", "ventanaResumen", opcionesVentana);
+window.open("./src/VentanaEmergente.html", "ventanaResumen", opcionesVentana);
 }
-
-
-
 
 function reiniciarPaginaTrasTramite() {
 donacionesActuales = [];
@@ -279,8 +273,6 @@ let formulario = document.getElementById("formularioDonacion");
 formulario.reset();
 limpiarFormularioYOcultarCodigoSocio();
 }
-
-
 function formatearFechaHoraCompleta(fecha) {
 let dia = String(fecha.getDate()).padStart(2, "0");
 let mes = String(fecha.getMonth() + 1).padStart(2, "0");

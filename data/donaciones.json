@@ -1,17 +1,17 @@
 {
     "organizaciones": [{
             "id": "1",
-            "nombre": "UNICEF",
+            "nombre": "unicef",
             "acogida": false,
             "rangoEdad": "infancia",
-            "imagen": "./img/imagen1.jpeg"
+            "imagen": "../img/UNICEF.webp"
         },
         {
             "id": "2",
             "nombre": "WWF",
             "multiraza": true,
             "ambito": "internacional",
-            "imagen": "./img/imagen1.jpeg"
+            "imagen": "../img/wwf.webp"
         }
     ],
     "tramiteDonacion": [{
