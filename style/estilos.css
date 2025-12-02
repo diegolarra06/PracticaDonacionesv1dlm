@@ -47,7 +47,6 @@ h1 {
     font-size: 1em;
     margin-bottom: 5px;
 }
-
 .LateralDerecho{
     position: fixed;
     right: 20px;
@@ -69,6 +68,76 @@ h1 {
  }
 .LineaDonacion--resaltada{ 
     background: #e0f2ff; 
+}
+#seccionFormularioDonacion {
+    max-width: 600px;
+    margin: 40px auto 0 auto;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 1px 2px 8px #ddd;
+}
+#seccionFormularioDonacion h2 {
+    text-align: center;
+    margin-top: 0;
+}
+.campoFormulario {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.campoFormulario label {
+    font-weight: 600;
+}
+.campoFormulario input {
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.95em;
+}
+.grupoRadios {
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+}
+.grupoRadios legend {
+    font-weight: 600;
+}
+.grupoRadios label {
+    display: block;
+    margin-bottom: 4px;
+}
+.botonesFormulario {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+.botonesFormulario button {
+    padding: 8px 18px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95em;
+}
+#botonRealizarDonacion {
+    background: #023f72;
+    color: #fff;
+}
+#botonRealizarDonacion:hover {
+    background: #000000;
+}
+#botonLimpiarFormulario {
+    background: #e0e0e0;
+}
+#botonLimpiarFormulario:hover {
+    background: #bdbdbd;
+}
+.oculto {
+    display: none;
 }
 
 
