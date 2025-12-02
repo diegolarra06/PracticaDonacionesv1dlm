@@ -13,7 +13,22 @@
       "multiraza": true,
       "ambito": "internacional",
       "imagen": "../img/wwf.webp"
+    } ,
+    {
+      "id": 3,
+      "nombre": "Médicos Sin Fronteras",
+      "acogida": false,
+      "rangoEdad": "todas las edades",
+      "imagen": "../img/medicossinfrontera.jpg"
+    },
+{
+      "id": 4,
+      "nombre": "Cáritas",
+      "acogida": true,
+      "rangoEdad": "todas las edades",
+      "imagen": "../img/CARITAS.jfif"
     }
+  
   ],
   "tramiteDonacion": [
     {
