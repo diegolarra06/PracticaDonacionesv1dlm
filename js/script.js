@@ -9,37 +9,50 @@ function iniciarAplicacion() {
             crearTarjetasOrganizaciones();
         });
 }
-
-function cargarDatosDesdeJson() {
-return fetch("http://localhost:3000/organizaciones").then(function (response) {
-    if (response.ok) {
-    return response.json(); 
-    } else {
-    throw new Error("Error HTTP: " + response.status + " (" + response.statusText + ")");
-    }
-    })
-    .then(function (datos) {
-    listaOrganizaciones = (datos.organizaciones || []).map(function (org) {
-    return normalizarOrganizacion(org);
-    });
-})
-    .catch(function (error) {
-    console.error("Error al cargar los datos del JSON:", error);
-    listaOrganizaciones = [];
+/* Cargar organizaciones desde json-server */
+function cargarOrganizacionesDesdeJson() {
+    return fetch("http://localhost:3000/organizaciones")
+        .then(function (respuesta) {
+            if (respuesta.ok) {
+                return respuesta.json();
+            } else {
+                throw new Error("Error HTTP: " + respuesta.status + " (" + respuesta.statusText + ")");
+            }
+        })
+        .then(function (datos) {  
+            let listaDatosOrganizaciones = [];
+            if (Array.isArray(datos)) {
+                listaDatosOrganizaciones = datos;
+            } else if (datos && Array.isArray(datos.organizaciones)) {
+                listaDatosOrganizaciones = datos.organizaciones;
+            }
+            listaOrganizaciones = listaDatosOrganizaciones.map(function (organizacionOriginal) {
+                return normalizarOrganizacion(organizacionOriginal);
+            });
+        })
+        .catch(function (error) {
+            console.error("Error al cargar los datos del JSON:", error);
+            listaOrganizaciones = [];
         });
 }
-function normalizarOrganizacion(org) {
-    let esPersonas = (typeof org.acogida !== "undefined") || (typeof org.rangoEdad !== "undefined");
+/*Normalizar la organización (incluyendo la imagen) */
+function normalizarOrganizacion(organizacionOriginal) {
+    let esOrganizacionDePersonas =
+        typeof organizacionOriginal.acogida !== "undefined" ||
+        typeof organizacionOriginal.rangoEdad !== "undefined";
+
     return {
-        id: org.id,
-        nombre: org.nombre,
-        tipo: esPersonas ? "personas" : "animales",
-        acogida: esPersonas ? !!org.acogida : null,
-        rangoEdad: esPersonas ? (org.rangoEdad || null) : null,
-        multiraza: !esPersonas ? !!org.multiraza : null,
-        ambito: !esPersonas ? (org.ambito || null) : null
+        id: String(organizacionOriginal.id), 
+        nombre: organizacionOriginal.nombre,
+        tipo: esOrganizacionDePersonas ? "personas" : "animales",
+        acogida: esOrganizacionDePersonas ? Boolean(organizacionOriginal.acogida) : null,
+        rangoEdad: esOrganizacionDePersonas ? (organizacionOriginal.rangoEdad || null) : null,
+        multiraza: !esOrganizacionDePersonas ? Boolean(organizacionOriginal.multiraza) : null,
+        ambito: !esOrganizacionDePersonas ? (organizacionOriginal.ambito || null) : null,
+        rutaImagen: organizacionOriginal.imagen || ""   
     };
 }
+
 
 function prepararTarjetasConInputs() {
 let tarjetas = document.querySelectorAll("#contenedorPrincipal .OrganizacionesBeneficas");
