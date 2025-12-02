@@ -53,55 +53,85 @@ function normalizarOrganizacion(organizacionOriginal) {
     };
 }
 
+function crearTarjetasOrganizaciones() {
+    let contenedorOrganizaciones = document.getElementById("contenedorPrincipal");
+    contenedorOrganizaciones.innerHTML = "";
 
-function prepararTarjetasConInputs() {
-let tarjetas = document.querySelectorAll("#contenedorPrincipal .OrganizacionesBeneficas");
-for (let i = 0; i < tarjetas.length; i++) {
-let tarjeta = tarjetas[i];
-let zonaPrecio = tarjeta.querySelector(".PrecioAportacion");
-zonaPrecio.textContent = "";
-let input = document.createElement("input");
-input.type = "number";
-input.min = "0";
-input.step = "0.01";
-input.placeholder = "€";
-input.className = "PrecioAportacion";
-zonaPrecio.appendChild(input);
-let imagen = tarjeta.querySelector(".logoImagen");
-imagen.addEventListener("click", function () {
-    let nombreOrg = tarjeta.querySelector(".nombreCausasBeneficas").textContent.trim();
-    let cantidad = parseFloat(input.value);
-        if (!isNaN(cantidad) && cantidad > 0) {
-            registrarDonacion(nombreOrg, cantidad);
-            input.value = "";
+    for (let i = 0; i < listaOrganizaciones.length; i++) {
+        let organizacion = listaOrganizaciones[i];
+
+        let tarjetaOrganizacion = document.createElement("div");
+        tarjetaOrganizacion.className = "OrganizacionesBeneficas";
+
+        let imagenOrganizacion = document.createElement("img");
+        imagenOrganizacion.className = "logoImagen";
+        imagenOrganizacion.alt = organizacion.nombre;
+        imagenOrganizacion.src = organizacion.rutaImagen;
+
+        let nombreOrganizacion = document.createElement("div");
+        nombreOrganizacion.className = "nombreCausasBeneficas";
+        nombreOrganizacion.textContent = organizacion.nombre;
+
+        let contenedorAportacion = document.createElement("div");
+        contenedorAportacion.className = "PrecioAportacion";
+
+        let campoCantidad = document.createElement("input");
+        campoCantidad.type = "number";
+        campoCantidad.min = "0";
+        campoCantidad.step = "0.01";
+        campoCantidad.placeholder = "€";
+        campoCantidad.className = "PrecioAportacion";
+
+        contenedorAportacion.appendChild(campoCantidad);
+        imagenOrganizacion.addEventListener("click", function () {
+            let cantidadIntroducida = parseFloat(campoCantidad.value);
+
+            if (!isNaN(cantidadIntroducida) && cantidadIntroducida > 0) {
+                registrarDonacion(organizacion.nombre, cantidadIntroducida);
+                campoCantidad.value = "";
             }
         });
+        tarjetaOrganizacion.appendChild(imagenOrganizacion);
+        tarjetaOrganizacion.appendChild(nombreOrganizacion);
+        tarjetaOrganizacion.appendChild(contenedorAportacion);
+        contenedorOrganizaciones.appendChild(tarjetaOrganizacion);
     }
 }
-
+/*Ajuste pequeño en registrarDonacion para el scroll (punto 1.3) */
 function registrarDonacion(nombreOrganizacion, cantidad) {
-let organizacion = buscarOrganizacionPorNombre(nombreOrganizacion);
-let idOrg = organizacion ? organizacion.id : "NOMBRE_NO_EN_JSON";
-let registro = {
-idOrganizacion: idOrg,
-nombre: nombreOrganizacion,
-cantidad: cantidad,
-fechaHora: new Date()
-};
+    let organizacion = buscarOrganizacionPorNombre(nombreOrganizacion);
+    let idOrganizacion = organizacion ? organizacion.id : "NOMBRE_NO_EN_JSON";
 
-donacionesActuales.push(registro);
-let lista = document.getElementById("listaDonaciones");
-let linea = document.createElement("div");
-linea.className = "LineaDonacion";
-linea.setAttribute("data-id-org", String(idOrg));
-linea.textContent = nombreOrganizacion + " " + formatearDinero2(cantidad) + " €";
-lista.appendChild(linea);
-    if (ultimoIdResaltado !== null && ultimoIdResaltado !== idOrg) {
+    let registroDonacion = {
+        idOrganizacion: idOrganizacion,
+        nombre: nombreOrganizacion,
+        cantidad: cantidad,
+        fechaHora: new Date()
+    };
+
+    donacionesActuales.push(registroDonacion);
+
+    let contenedorListaDonaciones = document.getElementById("listaDonaciones");
+    let lineaDonacion = document.createElement("div");
+    lineaDonacion.className = "LineaDonacion";
+    lineaDonacion.setAttribute("data-id-org", String(idOrganizacion));
+    lineaDonacion.textContent = nombreOrganizacion + " " + formatearDinero2(cantidad) + " €";
+
+    contenedorListaDonaciones.appendChild(lineaDonacion);
+
+    contenedorListaDonaciones.scrollTop = contenedorListaDonaciones.scrollHeight;
+
+    if (ultimoIdResaltado !== null && ultimoIdResaltado !== idOrganizacion) {
         desmarcarLineasDeOrganizacion(ultimoIdResaltado);
     }
-marcarLineasDeOrganizacion(idOrg);
-ultimoIdResaltado = idOrg;
+
+    marcarLineasDeOrganizacion(idOrganizacion);
+    ultimoIdResaltado = idOrganizacion;
 }
+
+
+
+
 
 function marcarLineasDeOrganizacion(idOrg) {
 let lineas = document.querySelectorAll('#listaDonaciones .LineaDonacion[data-id-org="' + String(idOrg) + '"]');
