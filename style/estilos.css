@@ -47,20 +47,7 @@ h1 {
     font-size: 1em;
     margin-bottom: 5px;
 }
-.Resultados {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    margin: 35px auto 0 auto;
-    max-width: 550px;
-    min-height: 50px;
-    padding: 18px;
-    line-height: 1.5;
-    font-size: 1em;
-    color: #464646;
-    box-shadow: 1px 2px 8px #272727;
-    text-align: center;
-}
+
 .LateralDerecho{
     position: fixed;
     right: 20px;
@@ -83,21 +70,7 @@ h1 {
 .LineaDonacion--resaltada{ 
     background: #e0f2ff; 
 }
-#botonFinal {
-    display: block;
-    margin: 0 auto;
-    margin-top: 12px;
-    padding: 10px 22px;
-    border: none;
-    border-radius: 5px;
-    background: #023f72;
-    color: #fff;
-    font-size: 1.0em;
-    cursor: pointer;
-    box-shadow: 1px 2px 8px #b3cdf6;
-}
-#botonFinal:hover{
-    background: #000000;
-}
+
+
 
 

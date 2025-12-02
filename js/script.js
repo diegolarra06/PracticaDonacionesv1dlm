@@ -129,10 +129,6 @@ function registrarDonacion(nombreOrganizacion, cantidad) {
     ultimoIdResaltado = idOrganizacion;
 }
 
-
-
-
-
 function marcarLineasDeOrganizacion(idOrg) {
 let lineas = document.querySelectorAll('#listaDonaciones .LineaDonacion[data-id-org="' + String(idOrg) + '"]');
     for (let i = 0; i < lineas.length; i++) {
@@ -157,121 +153,7 @@ let nombreMayus = (nombre || "").toLocaleUpperCase();
     }
     return null;
 }
-function finalizarTramite() {
-if (donacionesActuales.length === 0) {
-    return;
-    }
-let fechaFin = new Date();
-let agrupado = agruparDonacionesPorOrganizacion(donacionesActuales);
-let listaResumen = [];
-for (let clave in agrupado) {
-    if (agrupado[clave]) {
-    listaResumen.push(agrupado[clave]);
-    }
-}
-listaResumen.sort(function (a, b) {
-    return b.nombre.localeCompare(a.nombre, "es");
-    });
-let totalGlobal = 0;
-let totalNumeroDonaciones = 0;
-    for (let i = 0; i < listaResumen.length; i++) {
-    totalGlobal += listaResumen[i].importeTotal;
-    totalNumeroDonaciones += listaResumen[i].numDonaciones;
-}
-let mediaGlobal = totalNumeroDonaciones > 0 ? (totalGlobal / totalNumeroDonaciones) : 0;
-let zonaResultados = document.getElementById("Resultados");
-zonaResultados.innerHTML = "";
-let parrafoFecha = document.createElement("p"); 
-parrafoFecha.textContent = "Fecha de compra: " + formatearFechaHoraCompleta(fechaFin);
-zonaResultados.appendChild(parrafoFecha);
-for (let j = 0; j < listaResumen.length; j++) {
-let o = listaResumen[j];
-let mediaOrg = o.numDonaciones > 0 ? (o.importeTotal / o.numDonaciones) : 0;
-let linea = document.createElement("p"); 
-linea.textContent = o.nombre + " ---- " + o.numDonaciones + " donaciones --- " +
-formatearDinero2(mediaOrg) + "€ -- " + formatearDinero2(o.importeTotal) + "€";
-    zonaResultados.appendChild(linea);
-    }
 
-let lineaTotal = document.createElement("p"); 
-lineaTotal.textContent = "Aporte total : " + formatearDinero2(totalGlobal) + " €";
-zonaResultados.appendChild(lineaTotal);
-let lineaMedia = document.createElement("p"); 
-lineaMedia.textContent = "Aporte medio: " + formatearDinero3(mediaGlobal) + " €/donación";
-zonaResultados.appendChild(lineaMedia);
-
-let mensajes = construirMensajesPeculiaridades(listaResumen.map(function (x) { return x.nombre; }));
-alert(mensajes.join("\n"));
-
-guardarTramiteComoJson(fechaFin, listaResumen);
-
-setTimeout(reiniciarTodo, 10000);
-}
-
-function agruparDonacionesPorOrganizacion(lista) {
-let mapa = {};
-    for (let i = 0; i < lista.length; i++) {
-    let d = lista[i];
-    let clave = String(d.idOrganizacion);
-    if (!mapa[clave]) {
-    mapa[clave] = { idOrganizacion: d.idOrganizacion, nombre: d.nombre, importeTotal: 0, numDonaciones: 0 };     
-}
-    mapa[clave].importeTotal += d.cantidad;
-    mapa[clave].numDonaciones += 1;
-}
-
-return mapa;
-}
-
-function construirMensajesPeculiaridades(nombresSeleccionados) {
-let mensajes = [];
-    for (let i = 0; i < nombresSeleccionados.length; i++) {
-    let nombre = nombresSeleccionados[i];
-    let org = buscarOrganizacionPorNombre(nombre);
-    if (org) {
-    if (org.tipo === "personas") {
-    let frase = org.nombre + " trabaja con personas, está enfocada en la " +(org.rangoEdad || "—") + " y " + (org.acogida ? "tramita" : "no tramita") + " acogidas.";
-    mensajes.push(frase);
-    } 
-    else 
-    {
-    let base = org.multiraza ? "con todo tipo de animales" : "con un ámbito específico de especies";
-    let amb = org.ambito ? (" a nivel " + org.ambito) : "";
-    let frase2 = org.nombre + " trabaja " + base + amb + ".";
-    mensajes.push(frase2);
-    }
-    } else {
-    mensajes.push(nombre + ": datos específicos no disponibles en el JSON.");
-    }
-}
-return mensajes;
-}
-
-function guardarTramiteComoJson(fechaFin, listaResumen) {
-let tramite = {
-id: identificadorTramite++,
-fecha: formatearMesAnio(fechaFin),
-donaciones: listaResumen.map(function (o) {
-let ref = buscarOrganizacionPorNombre(o.nombre);
-let idRef = ref ? ref.id : o.nombre;
-return {
-idOrganizacion: idRef, importeTotal: aplicarRedondeoHaciaAbajoDosDecimales(o.importeTotal), numDonaciones: o.numDonaciones
-    };
-})
-};
-let anterior = localStorage.getItem("historialTramites");
-let lista = anterior ? JSON.parse(anterior) : [];
-lista.push(tramite);
-localStorage.setItem("historialTramites", JSON.stringify(lista));
-}
-function reiniciarTodo() {
-let lista = document.getElementById("listaDonaciones");
-let resultados = document.getElementById("Resultados");
-lista.innerHTML = "";
-resultados.innerHTML = "";
-donacionesActuales = [];
-ultimoIdResaltado = null;
-}
 function formatearFechaHoraCompleta(fecha) {
 let dia = String(fecha.getDate()).padStart(2, "0");
 let mes = String(fecha.getMonth() + 1).padStart(2, "0");
