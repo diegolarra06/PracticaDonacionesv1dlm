@@ -165,9 +165,11 @@ function registrarEventosDelFormulario() {
     let botonLimpiar = document.getElementById("botonLimpiarFormulario");
     botonLimpiar.addEventListener("click", limpiarFormularioYOcultarCodigoSocio);
     formulario.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        console.log("Formulario enviado (lógica de validación se añadirá en la siguiente parte)");
-    });
+    if (!validarFormulario(evento)) {
+        return; 
+    }
+    abrirVentanaEmergenteConDatos();
+});
 }
 
 function gestionarVisibilidadCodigoSocio() {
@@ -243,6 +245,18 @@ function validarRadios(nombreGrupo, nombreMostrar, listaErrores) {
         label.style.color = "red";
     }
 }
+
+function restaurarColorLabels() {
+    let labels = document.querySelectorAll("label, fieldset legend");
+    for (let i = 0; i < labels.length; i++) {
+        labels[i].style.color = "";
+    }
+}
+
+function obtenerLabelDeCampo(idCampo) {
+    return document.querySelector('label[for="' + idCampo + '"]');
+}
+
 
 
 function formatearFechaHoraCompleta(fecha) {
