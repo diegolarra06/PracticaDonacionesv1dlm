@@ -55,45 +55,44 @@ function normalizarOrganizacion(organizacionOriginal) {
 function crearTarjetasOrganizaciones() {
     let contenedorOrganizaciones = document.getElementById("contenedorPrincipal");
     contenedorOrganizaciones.innerHTML = "";
-
     for (let i = 0; i < listaOrganizaciones.length; i++) {
-        let organizacion = listaOrganizaciones[i];
+    let organizacion = listaOrganizaciones[i];
 
-        let tarjetaOrganizacion = document.createElement("div");
-        tarjetaOrganizacion.className = "OrganizacionesBeneficas";
+    let tarjetaOrganizacion = document.createElement("div");
+    tarjetaOrganizacion.className = "OrganizacionesBeneficas";
 
-        let imagenOrganizacion = document.createElement("img");
-        imagenOrganizacion.className = "logoImagen";
-        imagenOrganizacion.alt = organizacion.nombre;
-        imagenOrganizacion.src = organizacion.rutaImagen;
+    let imagenOrganizacion = document.createElement("img");
+    imagenOrganizacion.className = "logoImagen";
+    imagenOrganizacion.alt = organizacion.nombre;
+    imagenOrganizacion.src = organizacion.rutaImagen;
 
-        let nombreOrganizacion = document.createElement("div");
-        nombreOrganizacion.className = "nombreCausasBeneficas";
-        nombreOrganizacion.textContent = organizacion.nombre;
+    let nombreOrganizacion = document.createElement("div");
+    nombreOrganizacion.className = "nombreCausasBeneficas";
+    nombreOrganizacion.textContent = organizacion.nombre;
 
-        let contenedorAportacion = document.createElement("div");
-        contenedorAportacion.className = "PrecioAportacion";
+    let contenedorAportacion = document.createElement("div");
+    contenedorAportacion.className = "PrecioAportacion";
 
-        let campoCantidad = document.createElement("input");
-        campoCantidad.type = "number";
-        campoCantidad.min = "0";
-        campoCantidad.step = "0.01";
-        campoCantidad.placeholder = "€";
-        campoCantidad.className = "PrecioAportacion";
+    let campoCantidad = document.createElement("input");
+    campoCantidad.type = "number"; 
+    campoCantidad.min = "0";
+    campoCantidad.step = "0.01";
+    campoCantidad.placeholder = "€";
+    campoCantidad.className = "PrecioAportacion";
 
-        contenedorAportacion.appendChild(campoCantidad);
-        imagenOrganizacion.addEventListener("click", function () {
-            let cantidadIntroducida = parseFloat(campoCantidad.value);
+    contenedorAportacion.appendChild(campoCantidad);
+    imagenOrganizacion.addEventListener("click", function () {
+    let cantidadIntroducida = parseFloat(campoCantidad.value);
 
-            if (!isNaN(cantidadIntroducida) && cantidadIntroducida > 0) {
-                registrarDonacion(organizacion.nombre, cantidadIntroducida);
-                campoCantidad.value = "";
-            }
-        });
-        tarjetaOrganizacion.appendChild(imagenOrganizacion);
-        tarjetaOrganizacion.appendChild(nombreOrganizacion);
-        tarjetaOrganizacion.appendChild(contenedorAportacion);
-        contenedorOrganizaciones.appendChild(tarjetaOrganizacion);
+if (!isNaN(cantidadIntroducida) && cantidadIntroducida > 0) {
+    registrarDonacion(organizacion.nombre, cantidadIntroducida);
+    campoCantidad.value = "";
+}
+    });
+    tarjetaOrganizacion.appendChild(imagenOrganizacion);
+    tarjetaOrganizacion.appendChild(nombreOrganizacion);
+    tarjetaOrganizacion.appendChild(contenedorAportacion);
+    contenedorOrganizaciones.appendChild(tarjetaOrganizacion);
     }
 }
 
@@ -102,10 +101,7 @@ function registrarDonacion(nombreOrganizacion, cantidad) {
     let idOrganizacion = organizacion ? organizacion.id : "NOMBRE_NO_EN_JSON";
 
     let registroDonacion = {
-        idOrganizacion: idOrganizacion,
-        nombre: nombreOrganizacion,
-        cantidad: cantidad,
-        fechaHora: new Date()
+    idOrganizacion: idOrganizacion, nombre: nombreOrganizacion, cantidad: cantidad, fechaHora: new Date()
     };
 
     donacionesActuales.push(registroDonacion);
@@ -115,15 +111,12 @@ function registrarDonacion(nombreOrganizacion, cantidad) {
     lineaDonacion.className = "LineaDonacion";
     lineaDonacion.setAttribute("data-id-org", String(idOrganizacion));
     lineaDonacion.textContent = nombreOrganizacion + " " + formatearDinero2(cantidad) + " €";
-
     contenedorListaDonaciones.appendChild(lineaDonacion);
-
     contenedorListaDonaciones.scrollTop = contenedorListaDonaciones.scrollHeight;
 
     if (ultimoIdResaltado !== null && ultimoIdResaltado !== idOrganizacion) {
-        desmarcarLineasDeOrganizacion(ultimoIdResaltado);
+    desmarcarLineasDeOrganizacion(ultimoIdResaltado);
     }
-
     marcarLineasDeOrganizacion(idOrganizacion);
     ultimoIdResaltado = idOrganizacion;
 }
@@ -131,14 +124,14 @@ function registrarDonacion(nombreOrganizacion, cantidad) {
 function marcarLineasDeOrganizacion(idOrg) {
 let lineas = document.querySelectorAll('#listaDonaciones .LineaDonacion[data-id-org="' + String(idOrg) + '"]');
     for (let i = 0; i < lineas.length; i++) {
-        lineas[i].classList.add("LineaDonacion--resaltada");
+    lineas[i].classList.add("LineaDonacion--resaltada");
     }
 }
 
 function desmarcarLineasDeOrganizacion(idOrg) {
 let lineas = document.querySelectorAll('#listaDonaciones .LineaDonacion[data-id-org="' + String(idOrg) + '"]');
     for (let i = 0; i < lineas.length; i++) {
-        lineas[i].classList.remove("LineaDonacion--resaltada");
+    lineas[i].classList.remove("LineaDonacion--resaltada");
     }
 }
 
@@ -146,11 +139,11 @@ function buscarOrganizacionPorNombre(nombre) {
 let nombreMayus = (nombre || "").toLocaleUpperCase();
     for (let i = 0; i < listaOrganizaciones.length; i++) {
     let org = listaOrganizaciones[i];
-        if ((org.nombre || "").toLocaleUpperCase() === nombreMayus) {
-            return org;
-        }
+    if ((org.nombre || "").toLocaleUpperCase() === nombreMayus) {
+    return org;
     }
-    return null;
+}
+return null;
 }
 
 function registrarEventosDelFormulario() {
@@ -171,20 +164,17 @@ function registrarEventosDelFormulario() {
 
 function gestionarVisibilidadCodigoSocio() {
     let campoCodigoSocio = document.getElementById("contenedorCampoCodigoSocio");
-
     let opcionSeleccionada = document.querySelector('input[name="esSocio"]:checked');
-
     if (opcionSeleccionada && opcionSeleccionada.value === "si") {
-        campoCodigoSocio.classList.remove("oculto");
+    campoCodigoSocio.classList.remove("oculto");
     } else {
-        campoCodigoSocio.classList.add("oculto");
-        document.getElementById("codigoSocio").value = "";  
-    }
+    campoCodigoSocio.classList.add("oculto");
+    document.getElementById("codigoSocio").value = "";  
+}
 }
 
 function limpiarFormularioYOcultarCodigoSocio() {
     let campoCodigoSocio = document.getElementById("contenedorCampoCodigoSocio");
-
     campoCodigoSocio.classList.add("oculto");
     document.getElementById("codigoSocio").value = "";
 }
@@ -198,21 +188,20 @@ function validarFormulario(evento) {
         { id: "apellidosDonante", mensajePersonal: null },
         { id: "direccionDonante", mensajePersonal: null },
         { id: "correoElectronicoDonante", mensajePersonal: null },
-        { id: "codigoSocio", mensajePersonal: "El código de socio no cumple el formato requerido." }
+        { id: "codigoSocio", mensajePersonal: "El código de socio no cumple con el formato requerido." }
     ];
     for (let i = 0; i < campos.length; i++) {
-
-        let campo = document.getElementById(campos[i].id);
-        let labelCampo = obtenerLabelDeCampo(campos[i].id);
-        if (campo.parentElement.classList.contains("oculto")) {
-        continue;
-        }
-        if (!campo.validity.valid) {
-            labelCampo.style.color = "red";
-            let mensaje = campos[i].mensajePersonal || campo.validationMessage || "Este campo no es válido.";
-            listaErrores.push(labelCampo.textContent + ": " + mensaje);
-        }
+    let campo = document.getElementById(campos[i].id);
+    let labelCampo = obtenerLabelDeCampo(campos[i].id);
+    if (campo.parentElement.classList.contains("oculto")) {
+    continue;
     }
+    if (!campo.validity.valid) {
+    labelCampo.style.color = "red";
+    let mensaje = campos[i].mensajePersonal || campo.validationMessage || "Este campo no es válido.";
+    listaErrores.push(labelCampo.textContent + ": " + mensaje);
+}
+}
     validarRadios("formaPago", "Forma de pago", listaErrores);
     validarRadios("esSocio", "¿Tiene tarjeta de socio?", listaErrores);
     if (listaErrores.length > 0) {
@@ -235,16 +224,16 @@ function validarRadios(nombreGrupo, nombreMostrar, listaErrores) {
         }
     }
     if (!algunaMarcada) {
-        listaErrores.push(nombreMostrar + ": Debe seleccionar una opción.");
-        let label = opciones[0].closest("fieldset").querySelector("legend");
-        label.style.color = "red";
+    listaErrores.push(nombreMostrar + ": Debe seleccionar una opción.");
+    let label = opciones[0].closest("fieldset").querySelector("legend");
+    label.style.color = "red";
     }
 }
 
 function restaurarColorLabels() {
     let labels = document.querySelectorAll("label, fieldset legend");
     for (let i = 0; i < labels.length; i++) {
-        labels[i].style.color = "";
+    labels[i].style.color = "";
     }
 }
 
@@ -254,7 +243,6 @@ function obtenerLabelDeCampo(idCampo) {
 
 function obtenerDatosDelFormulario() {
     let datos = {};
-
     datos.nombre = document.getElementById("nombreDonante").value.trim();
     datos.apellidos = document.getElementById("apellidosDonante").value.trim();
     datos.direccion = document.getElementById("direccionDonante").value.trim();
@@ -265,36 +253,30 @@ function obtenerDatosDelFormulario() {
 
     let esSocio = document.querySelector('input[name="esSocio"]:checked');
     datos.esSocio = esSocio ? esSocio.value : "";
-
     datos.codigoSocio = document.getElementById("codigoSocio").value.trim();
-
     return datos;
 }
-
 
 function construirResumenDeDonaciones() {
     let listaResumen = [];
 
     for (let i = 0; i < donacionesActuales.length; i++) {
-        let donacion = donacionesActuales[i];
-        let encontrado = null;
+    let donacion = donacionesActuales[i];
+    let encontrado = null;
         for (let j = 0; j < listaResumen.length; j++) {
             if (listaResumen[j].idOrganizacion === donacion.idOrganizacion) {
-                encontrado = listaResumen[j];
-                break;
+            encontrado = listaResumen[j];
+            break;
             }
         }
-        if (encontrado === null) {
-            encontrado = {
-                idOrganizacion: donacion.idOrganizacion,
-                nombre: donacion.nombre,
-                importeTotal: 0,
-                numeroDonaciones: 0
-            };
-            listaResumen.push(encontrado);
-        }
-        encontrado.importeTotal += donacion.cantidad;
-        encontrado.numeroDonaciones++;
+    if (encontrado === null) {
+    encontrado = {
+    idOrganizacion: donacion.idOrganizacion, nombre: donacion.nombre, importeTotal: 0, numeroDonaciones: 0
+    };
+    listaResumen.push(encontrado);
+    }
+    encontrado.importeTotal += donacion.cantidad;
+    encontrado.numeroDonaciones++;
     }
     return listaResumen;
 }
@@ -341,6 +323,4 @@ let v = aplicarRedondeoHaciaAbajoDosDecimales(valor);
 function formatearDinero3(valor) {
 return Number(valor).toLocaleString("es-ES", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
 }
-document.addEventListener("DOMContentLoaded", function () {
-iniciarAplicacion();
-});
+

@@ -9,20 +9,15 @@
     <script src="../js/script.js"></script>
 </head>
 <body>
-    <h1>Aportaciones a Causas Benéficas</h1>
- 
+<h1>Aportaciones a Causas Benéficas</h1>
 <div id="contenedorPrincipal" class="CentrarOrganizaciones">
-   
 </div>
-
 <aside id="zonaLateral" class="LateralDerecho">
     <h3>Donaciones registradas</h3>
     <div id="listaDonaciones" aria-live="polite"></div>
 </aside>
-
 <section id="seccionFormularioDonacion">
     <h2>Datos para la donación</h2>
-
     <form id="formularioDonacion" action="#" method="get" novalidate>
         <div class="campoFormulario">
             <label for="nombreDonante">Nombre</label>
@@ -34,7 +29,6 @@
                 minlength="4"
                 maxlength="15">
         </div>
-
         <div class="campoFormulario">
             <label for="apellidosDonante">Apellidos</label>
             <input
@@ -43,7 +37,6 @@
                 name="apellidosDonante"
                 required>
         </div>
-
         <div class="campoFormulario">
             <label for="direccionDonante">Dirección</label>
             <input
@@ -52,7 +45,6 @@
                 name="direccionDonante"
                 required>
         </div>
-
         <div class="campoFormulario">
             <label for="correoElectronicoDonante">Correo electrónico</label>
             <input
@@ -61,7 +53,6 @@
                 name="correoElectronicoDonante"
                 required>
         </div>
-
         <fieldset class="grupoRadios">
             <legend>Forma de pago</legend>
             <label>
@@ -73,7 +64,6 @@
                 Transferencia
             </label>
         </fieldset>
-
         <fieldset class="grupoRadios">
             <legend>¿Tiene tarjeta de socio?</legend>
             <label>
@@ -85,7 +75,6 @@
                 No
             </label>
         </fieldset>
-
         <div class="campoFormulario oculto" id="contenedorCampoCodigoSocio">
             <label for="codigoSocio">Código de socio</label>
             <input
@@ -96,7 +85,6 @@
                 minlength="8"
                 maxlength="8">
         </div>
-
         <div class="botonesFormulario">
             <button type="submit" id="botonRealizarDonacion">Realizar donación</button>
             <button type="reset" id="botonLimpiarFormulario">Limpiar formulario</button>

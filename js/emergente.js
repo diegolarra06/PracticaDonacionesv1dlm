@@ -48,13 +48,8 @@ function mostrarResumenEnEmergente() {
 
     for (let i = 0; i < resumenDonaciones.length; i++) {
         let d = resumenDonaciones[i];
-
         let linea = document.createElement("p");
-        linea.textContent =
-            d.nombre + ": " +
-            d.numeroDonaciones + " donaciones — Total: " +
-            d.importeTotal.toFixed(2) + " €";
-
+        linea.textContent = d.nombre + ": " + d.numeroDonaciones + " donaciones — Total: " + d.importeTotal.toFixed(2) + " €";
         divResumenDonaciones.appendChild(linea);
     }
 }
@@ -64,7 +59,7 @@ let datosFormulario = JSON.parse(sessionStorage.getItem("datosFormulario"));
 let resumenDonaciones = JSON.parse(sessionStorage.getItem("resumenDonaciones"));
 
 let objetoTramite = {
-    fecha: generarMesAnioActual(),
+    fecha: generarMesAnioActual(), 
     datosUsuario: datosFormulario,
     donaciones: resumenDonaciones.map(function (d) {
     return {

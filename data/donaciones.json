@@ -2,7 +2,7 @@
   "organizaciones": [
     {
       "id": "1",
-      "nombre": "UNICEF",
+      "nombre": "Unicef",
       "acogida": false,
       "rangoEdad": "infancia",
       "imagen": "../img/UNICEF.webp"
@@ -19,7 +19,7 @@
       "nombre": "Médicos Sin Fronteras",
       "acogida": false,
       "rangoEdad": "todas las edades",
-      "imagen": "../img/medicossinfrontera.jpg"
+      "imagen": "../img/medicosinfrontera.jpg"
     },
     {
       "id": "4",
@@ -123,7 +123,7 @@
         "correo": "correo1@gmail.com",
         "formaPago": "tarjeta",
         "esSocio": "no",
-        "codigoSocio": ""
+        "codigoSocio": "tfg1234/"
       },
       "donaciones": [
         {
@@ -174,6 +174,91 @@
         {
           "idOrganizacion": "10",
           "importeTotal": 10,
+          "numDonaciones": 1
+        }
+      ]
+    },
+    {
+      "id": "ae69",
+      "fecha": "12/2025",
+      "datosUsuario": {
+        "nombre": "Mario",
+        "apellidos": "Colomino",
+        "direccion": "Calle Madrid",
+        "correo": "federico@gmail.com",
+        "formaPago": "tarjeta",
+        "esSocio": "no",
+        "codigoSocio": ""
+      },
+      "donaciones": [
+        {
+          "idOrganizacion": "1",
+          "importeTotal": 10,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "2",
+          "importeTotal": 47,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "3",
+          "importeTotal": 75,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "4",
+          "importeTotal": 35,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "5",
+          "importeTotal": 789,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "6",
+          "importeTotal": 3,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "7",
+          "importeTotal": 1,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "8",
+          "importeTotal": 5,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "9",
+          "importeTotal": 7,
+          "numDonaciones": 1
+        },
+        {
+          "idOrganizacion": "10",
+          "importeTotal": 24,
+          "numDonaciones": 1
+        }
+      ]
+    },
+    {
+      "id": "674d",
+      "fecha": "12/2025",
+      "datosUsuario": {
+        "nombre": "Arturo",
+        "apellidos": "Palomino",
+        "direccion": "Calle Madrid",
+        "correo": "correo1@gmail.com",
+        "formaPago": "tarjeta",
+        "esSocio": "si",
+        "codigoSocio": "tfg1234/"
+      },
+      "donaciones": [
+        {
+          "idOrganizacion": "3",
+          "importeTotal": 0.03,
           "numDonaciones": 1
         }
       ]
